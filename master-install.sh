@@ -196,17 +196,17 @@ cd $eqemu_server_directory/server
 #::: Map lowercase to uppercase to avoid issues
 ln -s maps Maps
 
-ln -s $eqemu_server_directory/source/Server/build/bin/loginserver loginserver
-ln -s $eqemu_server_directory/source/Server/build/bin/eqlaunch eqlaunch 
-ln -s $eqemu_server_directory/source/Server/build/bin/export_client_files export_client_files 
-ln -s $eqemu_server_directory/source/Server/build/bin/import_client_files import_client_files 
-ln -s $eqemu_server_directory/source/Server/build/bin/libcommon.a libcommon.a 
-ln -s $eqemu_server_directory/source/Server/build/bin/libluabind.a libluabind.a 
-ln -s $eqemu_server_directory/source/Server/build/bin/queryserv queryserv 
-ln -s $eqemu_server_directory/source/Server/build/bin/shared_memory shared_memory 
-ln -s $eqemu_server_directory/source/Server/build/bin/ucs ucs 
-ln -s $eqemu_server_directory/source/Server/build/bin/world world 
-ln -s $eqemu_server_directory/source/Server/build/bin/zone zone 
+ln -s $eqemu_server_directory/source/Server/build/bin/loginserver
+ln -s $eqemu_server_directory/source/Server/build/bin/eqlaunch
+ln -s $eqemu_server_directory/source/Server/build/bin/export_client_files
+ln -s $eqemu_server_directory/source/Server/build/bin/import_client_files
+ln -s $eqemu_server_directory/source/Server/build/bin/libcommon.a
+ln -s $eqemu_server_directory/source/Server/build/bin/libluabind.a
+ln -s $eqemu_server_directory/source/Server/build/bin/queryserv
+ln -s $eqemu_server_directory/source/Server/build/bin/shared_memory
+ln -s $eqemu_server_directory/source/Server/build/bin/ucs
+ln -s $eqemu_server_directory/source/Server/build/bin/world
+ln -s $eqemu_server_directory/source/Server/build/bin/zone
 
 #::: Notes
 
