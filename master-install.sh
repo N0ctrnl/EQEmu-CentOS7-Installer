@@ -144,7 +144,7 @@ yum -y groupinstall "Development Tools" "Basic Web Server" "Compatibility Librar
 
 elif [[ "$OS" == "FC" ]]; then
 # Do Fedora stuff
-dnf -y install open-vm-tools vim cmake boost-devel zlib-devel mariadb-server mariadb-devel mariadb-libs perl perl-DBD-MySQL perl-IO-stringy perl-devel lua-devel lua-sql-mysql dos2unix php-mysql proftpd wget compat-lua-libs compat-lua-devel compat-lua
+dnf -y install open-vm-tools vim cmake boost-devel zlib-devel mariadb-server mariadb-devel mariadb-libs perl perl-DBD-MySQL perl-IO-stringy perl-devel lua-devel lua-sql-mysql dos2unix php-mysql proftpd wget compat-lua-libs compat-lua-devel compat-lua perl-Time-HiRes
 dnf -y groupinstall "Development Tools" "Basic Web Server" "C Development Tools and Libraries"
 fi
 
