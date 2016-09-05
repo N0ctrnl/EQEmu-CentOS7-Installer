@@ -138,8 +138,6 @@ yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarc
 yum -y install deltarpm
 yum -y install open-vm-tools vim tuned tuned cmake boost-* zlib-devel mariadb-server mariadb-client mariadb-devel mariadb-libs mariadb-compat perl-* lua* p7zip dos2unix php-mysql iptables-services proftpd
 yum -y groupinstall "Development Tools" "Basic Web Server" "Compatibility Libraries"
-# Set tuned profile
-#tuned-adm profile virtual-guest
 # Start MariaDB server and set root password
 echo "Starting MariaDB server..."
 systemctl start mariadb.service
