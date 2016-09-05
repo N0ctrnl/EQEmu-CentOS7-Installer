@@ -7,8 +7,10 @@ fi
 
 if [[ -f /etc/debian_version ]]; then
    export OS=DEB
+elif [[ -f /etc/fedora-release ]]; then
+   export OS=FC
 elif [[ -f /etc/redhat-release ]]; then
-   export OS=RHEL
+   export OS=RH
 else
    echo "This script must be run on a Debian or RedHat derivative"
    exit 1
@@ -121,7 +123,7 @@ debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password_again
 apt-get install -y mariadb-server
 mysql -uroot -pPASS -e "SET PASSWORD = PASSWORD('$eqemu_db_root_password');"
 
-elif [[ "$OS" == "RHEL" ]]; then
+elif [[ "$OS" == "RH" ]]; then
 # Add the MariaDB repository to yum
 cat <<EOF > /etc/yum.repos.d/mariadb.repo
 # MariaDB 10.1 CentOS repository list - created 2016-08-20 05:42 UTC
@@ -135,6 +137,8 @@ gpgcheck=1
 EOF
 # Install prereqs
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+fi
+if [[ "$OS" == "RH" ]] || [[ "$OS" == "FC" ]]; then
 yum -y install deltarpm
 yum -y install open-vm-tools vim tuned tuned cmake boost-* zlib-devel mariadb-server mariadb-client mariadb-devel mariadb-libs mariadb-compat perl-* lua* p7zip dos2unix php-mysql iptables-services proftpd
 yum -y groupinstall "Development Tools" "Basic Web Server" "Compatibility Libraries"
@@ -175,7 +179,7 @@ if [[ "$OS" == "DEB" ]]; then
   wget http://eqemu.github.io/downloads/ubuntu_LoginServerCrypto_x64.zip
   unzip ubuntu_LoginServerCrypto_x64.zip
   rm ubuntu_LoginServerCrypto_x64.zip
-elif [[ "$OS" == "RHEL" ]]; then
+elif [[ "$OS" == "RH" ]]; then
   wget http://eqemu.github.io/downloads/fedora12_LoginServerCrypto_x64.zip
   unzip fedora12_LoginServerCrypto_x64.zip
   rm fedora12_LoginServerCrypto_x64.zip
