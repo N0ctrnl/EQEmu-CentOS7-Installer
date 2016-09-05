@@ -148,7 +148,7 @@ dnf -y install open-vm-tools vim cmake boost-devel zlib-devel mariadb-server mar
 dnf -y groupinstall "Development Tools" "Basic Web Server" "C Development Tools and Libraries"
 fi
 
-if [[ "$OS" == "RH" ]] || [[ "$OS" == "FC" ]]; then
+if [[ "$OS" == "FC" ]] || [[ "$OS" == "RH" ]]; then
 # Start MariaDB server and set root password
 echo "Starting MariaDB server..."
 systemctl enable mariadb.service
@@ -178,7 +178,11 @@ mkdir $eqemu_server_directory/source/Server/build
 cd $eqemu_server_directory/source/Server/build
 
 echo "Generating CMake build files..."
-cmake -DEQEMU_BUILD_LOGIN=ON -DEQEMU_BUILD_LUA=ON -G "Unix Makefiles" ..
+if [[ "$OS" == "FC" ]]; then
+  cmake -DEQEMU_BUILD_LOGIN=ON -DEQEMU_BUILD_LUA=ON -DLUA_INCLUDE_DIR=/usr/include/lua-5.1/ -G "Unix Makefiles" ..
+else
+  cmake -DEQEMU_BUILD_LOGIN=ON -DEQEMU_BUILD_LUA=ON -G "Unix Makefiles" ..
+fi
 echo "Building EQEmu Server code. This will take a while."
 
 #::: Grab loginserver dependencies
@@ -187,7 +191,7 @@ if [[ "$OS" == "DEB" ]]; then
   wget http://eqemu.github.io/downloads/ubuntu_LoginServerCrypto_x64.zip
   unzip ubuntu_LoginServerCrypto_x64.zip
   rm ubuntu_LoginServerCrypto_x64.zip
-elif [[ "$OS" == "RH" ]]; then
+elif [[ "$OS" == "FC" ]] || [[ "$OS" == "RH" ]]; then
   wget http://eqemu.github.io/downloads/fedora12_LoginServerCrypto_x64.zip
   unzip fedora12_LoginServerCrypto_x64.zip
   rm fedora12_LoginServerCrypto_x64.zip
