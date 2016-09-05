@@ -124,6 +124,7 @@ apt-get install -y mariadb-server
 mysql -uroot -pPASS -e "SET PASSWORD = PASSWORD('$eqemu_db_root_password');"
 
 elif [[ "$OS" == "RH" ]]; then
+# Do RedHat / CentOS stuff
 # Add the MariaDB repository to yum
 cat <<EOF > /etc/yum.repos.d/mariadb.repo
 # MariaDB 10.1 CentOS repository list - created 2016-08-20 05:42 UTC
@@ -137,13 +138,20 @@ gpgcheck=1
 EOF
 # Install prereqs
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-fi
-if [[ "$OS" == "RH" ]] || [[ "$OS" == "FC" ]]; then
 yum -y install deltarpm
-yum -y install open-vm-tools vim tuned tuned cmake boost-* zlib-devel mariadb-server mariadb-client mariadb-devel mariadb-libs mariadb-compat perl-* lua* p7zip dos2unix php-mysql iptables-services proftpd
+yum -y install open-vm-tools vim cmake boost-* zlib-devel mariadb-server mariadb-client mariadb-devel mariadb-libs mariadb-compat perl-* lua* dos2unix php-mysql proftpd
 yum -y groupinstall "Development Tools" "Basic Web Server" "Compatibility Libraries"
+
+elif [[ "$OS" == "FC" ]]; then
+# Do Fedora stuff
+dnf -y install open-vm-tools vim cmake boost-devel zlib-devel mariadb-server mariadb-devel mariadb-libs perl perl-DBD-MySQL perl-IO-stringy perl-devel lua-devel lua-sql-mysql dos2unix php-mysql proftpd wget compat-lua-libs compat-lua-devel compat-lua
+dnf -y groupinstall "Development Tools" "Basic Web Server" "C Development Tools and Libraries"
+fi
+
+if [[ "$OS" == "RH" ]] || [[ "$OS" == "FC" ]]; then
 # Start MariaDB server and set root password
 echo "Starting MariaDB server..."
+systemctl enable mariadb.service
 systemctl start mariadb.service
 sleep 5
 /usr/bin/mysqladmin -u root password $eqemu_db_root_password
