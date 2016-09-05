@@ -144,7 +144,7 @@ yum -y groupinstall "Development Tools" "Basic Web Server" "Compatibility Librar
 echo "Starting MariaDB server..."
 systemctl start mariadb.service
 sleep 5
-/usr/bin/mysqladmin -u root password '$eqemu_db_root_password'
+/usr/bin/mysqladmin -u root password $eqemu_db_root_password
 fi
 
 #::: Configure game server database user
